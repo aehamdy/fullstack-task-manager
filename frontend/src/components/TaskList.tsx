@@ -34,7 +34,7 @@ export default function TaskList({ token }: TaskListProps) {
     );
 
   return (
-    <div className="my-4 bg-white/10 p-2 rounded-md">
+    <div className="w-full my-4 bg-white/10 p-2 rounded-md">
       <h2 className="font-semibold text-2xl text-center">Task List View</h2>
 
       <hr />

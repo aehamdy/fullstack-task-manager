@@ -20,10 +20,7 @@ export default function AddTask({ token, onTaskAdded }: AddTaskProps) {
 
   return (
     <div className="flex flex-col gap-2">
-      <form
-        onSubmit={handleSubmit}
-        className="flex justify-between items-center"
-      >
+      <form onSubmit={handleSubmit} className="flex flex-col gap-2">
         <input
           placeholder="Title"
           value={title}

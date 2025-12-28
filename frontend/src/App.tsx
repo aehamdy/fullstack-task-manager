@@ -24,22 +24,26 @@ function App() {
   }
 
   return (
-    <div style={{ maxWidth: "600px", margin: "40px auto" }}>
-      <h1 className="mb-4 font-semi">Welcome, {user.name}</h1>
+    <div className="w-9/10 lg:w-1/2">
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="mb-4 font-semi">Welcome, {user.name}</h1>
 
-      <AddTask token={token} onTaskAdded={() => {}} />
-      <TaskList token={token} />
+        <button
+          onClick={() => {
+            localStorage.removeItem("token");
+            setUser(null);
+            setIsLoggedIn(false);
+          }}
+          className="p-1 text-white bg-red-600 rounded-md cursor-pointer"
+        >
+          Logout
+        </button>
+      </div>
 
-      <button
-        onClick={() => {
-          localStorage.removeItem("token");
-          setUser(null);
-          setIsLoggedIn(false);
-        }}
-        className="p-1 text-white bg-red-600 rounded-md cursor-pointer"
-      >
-        Logout
-      </button>
+      <div className="flex flex-col lg:flex-col-reverse gap-4">
+        <TaskList token={token} />
+        <AddTask token={token} onTaskAdded={() => {}} />
+      </div>
     </div>
   );
 }
