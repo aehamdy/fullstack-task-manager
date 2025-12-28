@@ -8,8 +8,13 @@ import type { User } from "./api/api";
 function App() {
   const [user, setUser] = useState<User | null>(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [refreshCounter, setRefreshCounter] = useState(0);
 
   const token = localStorage.getItem("token") || "";
+
+  const handleTaskAdded = () => {
+    setRefreshCounter((prev) => prev + 1);
+  };
 
   if (!user) {
     return (
@@ -41,8 +46,8 @@ function App() {
       </div>
 
       <div className="flex flex-col lg:flex-col-reverse gap-4">
-        <TaskList token={token} />
-        <AddTask token={token} onTaskAdded={() => {}} />
+        <TaskList key={refreshCounter} token={token} />
+        <AddTask token={token} onTaskAdded={handleTaskAdded} />
       </div>
     </div>
   );
