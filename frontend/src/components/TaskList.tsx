@@ -9,13 +9,17 @@ interface TaskListProps {
 
 export default function TaskList({ token }: TaskListProps) {
   const [tasks, setTasks] = useState<Task[]>([]);
+  const [loading, setLoading] = useState(true);
 
   const fetchTasks = useCallback(async () => {
     try {
+      setLoading(true);
       const res = await getTasks(token);
       setTasks(res.data);
     } catch (error) {
       console.error("Error fetching tasks:", error);
+    } finally {
+      setLoading(false);
     }
   }, [token]);
 
@@ -25,6 +29,10 @@ export default function TaskList({ token }: TaskListProps) {
     };
     loadTasks();
   }, [fetchTasks]);
+
+  if (loading) {
+    return <div className="my-4 bg-white/10 p-2 rounded-md">Loading...</div>;
+  }
 
   if (tasks.length === 0)
     return (
